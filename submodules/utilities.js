@@ -1,22 +1,20 @@
 /* utilities.js */
-var fs = require('fs'),
-    Module = {};
+var fs = require('fs'), Module = {};
 
 UtilitiesManagerModule = function (constants) {
-    Module = this;
-    Module.constants = constants;
+  Module = this;
+  Module.constants = constants;
 };
 
 UtilitiesManagerModule.prototype.parseCommandLineOptions = function (callback) {
-    var count = 0;
-    process.argv.forEach(function (value, index, array) {
-        if (count != 0 && count != 1) {
-            process.env[value.split('=')[0]] = value.split('=')[1]; /* Debug */
-            /* console.log('Read cmd parameter: ' + value.split('=')[0] + ', with value: ' + value.split('=')[1]); */
-        }
-        count++;
-    });
-    callback();
+  var count = 0;
+  process.argv.forEach(function (value, index, array) {
+    if (count != 0 && count != 1) {
+      process.env[value.split('=')[0]] = value.split('=')[1];
+    }
+    count++;
+  });
+  callback();
 };
 
 UtilitiesManagerModule.prototype.parseConfig = function (configFile, callback) {
@@ -145,9 +143,18 @@ UtilitiesManagerModule.prototype.validateType = function (type) {
 };
 
 UtilitiesManagerModule.prototype.isEmpty = function (variable) {
-    if (variable.name == 'none' || variable.name == '' || variable.name == undefined) return true;
+  if (variable == 'none' || variable== '' || typeof variable == 'undefined') 
+    return true;
 
-    return false;
+  return false;
+};
+
+UtilitiesManagerModule.prototype.run = function (command, callback) {
+  var exec;
+  exec = require('child_process').exec, child;
+  child = exec(command, function (error, stdout, stderr) {
+    callback(stdout.toString());
+  });
 };
 
 UtilitiesManagerModule.prototype.validateData = function (data) {
