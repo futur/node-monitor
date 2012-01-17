@@ -143,7 +143,7 @@ UtilitiesManagerModule.prototype.validateType = function (type) {
 };
 
 UtilitiesManagerModule.prototype.isEmpty = function (variable) {
-  if (variable == 'none' || variable== '' || typeof variable == 'undefined') 
+  if (variable == 'none' || variable == '' || typeof variable == 'undefined') 
     return true;
 
   return false;
