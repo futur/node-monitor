@@ -4,7 +4,6 @@
 var Modules, Plugin, fs;
 Modules = void 0;
 Plugin = void 0;
-fs = require("fs");
 Modules = {
   net: "net"
 };
@@ -32,14 +31,15 @@ Plugin.evaluateDeps = function(self) {
   return self.net = net;
 };
 this.poll = function(constants, utilities, logger, callback) {
-  var buffer, self, services;
+  var self, fs, buffer, services;
   self = this;
   self.constants = constants;
   self.utilities = utilities;
   self.logger = logger;
   Plugin.evaluateDeps(self);
-  services = [];
   buffer = [];
+  services = [];
+  var fs = require("fs");
   return fs.readFile(self.name + "_config", function(error, fd) {
     var Service, i, service;
     Service = function(name, port) {
