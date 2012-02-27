@@ -10,7 +10,8 @@ PluginsManagerModule = function (constants, utilities, logger, dao) {
   Module.dao = dao;
 };
 PluginsManagerModule.prototype.start = function () {
-  Module.logger.write(Module.constants.levels.INFO, 'Evaluating plugins'); /* Switch to plugins directory */
+  Module.logger.write(Module.constants.levels.INFO, 'Evaluating plugins'); 
+  /* Switch to plugins directory */
   try {
     process.chdir(Module.constants.strings.PLUGIN_DIRECTORY);
   } catch (Exception) {
