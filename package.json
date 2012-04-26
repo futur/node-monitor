@@ -6,8 +6,8 @@
 	"repository": "git://github.com/franklovecchio/node-monitor.git",
 	"author": "Frank LoVecchio <franklovecchio@gmail.com> (http://franklovecchio.com)",
 	"dependencies": {
+	    "optimist": "",
 		"querystring": "",
-		"xml2json": "",
 		"crypto": "",
 		"step": "",
 		"nodeunit": "",
@@ -17,13 +17,21 @@
 		"github": "",
 		"forever": "",
 		"iconv": "",
-		"ec2": ""
+		"ec2": "",
+		"walker": "",
+		"restler": "",
+		"stalker":"",
+		"knox":"",
+		"mqttjs":"",
+		"express":"",
+		"cron":"",
+		"simpledb":"",
+		"email": "",
+		"websocket-server": "",
+		"nodeunit": ""
 	},
 	"main": "run/client.js",
 	"license": {
 		"type": "Hack the planet"
-	},
-	"engines": { 
-		"node": ">= 0.4.8 <= 0.6.8" 
 	}
 }
