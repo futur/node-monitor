@@ -1,37 +1,28 @@
 {
-	"name": "node-monitor",
-	"version": "0.6.0",
-	"description": "Amazon CloudWatch environment monitor",
-	"keywords": ["amazon", "cloudwatch", "client", "node", "monitor"],
-	"repository": "git://github.com/franklovecchio/node-monitor.git",
-	"author": "Frank LoVecchio <franklovecchio@gmail.com> (http://franklovecchio.com)",
-	"dependencies": {
-	    "optimist": "",
-		"querystring": "",
-		"crypto": "",
-		"step": "",
-		"nodeunit": "",
-		"async": "",
-		"node-cloudwatch": "0.0.4",
-		"long-stack-traces": "",
-		"github": "",
-		"forever": "",
-		"iconv": "",
-		"ec2": "",
-		"walker": "",
-		"restler": "",
-		"stalker":"",
-		"knox":"",
-		"mqttjs":"",
-		"express":"",
-		"cron":"",
-		"simpledb":"",
-		"email": "",
-		"websocket-server": "",
-		"nodeunit": ""
-	},
-	"main": "run/client.js",
-	"license": {
-		"type": "Hack the planet"
-	}
+  "name": "node-monitor",
+  "version": "0.1.0",
+  "description": "Node.js monitor",
+  "keywords": ["node", "monitor"],
+  "repository": "git://github.com/franklovecchio/app-mq.git",
+  "author": "Frank LoVecchio <franklovecchio@gmail.com> (http://franklovecchio.com)",
+  "dependencies": {
+    "long-stack-traces": "",
+    "commander":"",
+    "alfred":"",
+    "crypto":"",
+    "node-cloudwatch":"",
+    "connect":"",
+    "express":"",
+    "restler": "",
+	"mqttjs":"",
+    "cassandra-client": "",
+    "redis":"",
+    "mongodb":""
+  },
+  "bin": {
+    "node-monitor": "./bin/node-monitor"
+  },
+  "license": {
+    "type": "Hack the planet"
+  }
 }

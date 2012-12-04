@@ -1,0 +1,15 @@
+v0.0.1
+- Oh hey, release notes were added, and proper versioning applied.
+- README.md updated to be useful.
+- All old branches removed (they were garbage). Tagging system implemented for CI.
+- AWS account removed as prerequisite. 
+- Interfaces in the form of Hooks added:
+- Plugins modified:
+- Node.js command line utility added:
+- Configuration API added:
+- Base AMI for Ubuntu created.
+- Install scripts for X ???
+- 100 machine example
+- add nstore for config https://github.com/creationix/nstore
+- Plugins should be able to run as separate coffee files - play 2.0 apps?
+- PLugins now loaded separately in that when reconfigured they are their own threads. https://bjouhier.wordpress.com/2012/03/11/fibers-and-threads-in-node-js-what-for/
