@@ -2,24 +2,26 @@
 # A persisted key/value filestore for managing configuration.
 #
 
-# Interface
-{EventEmitter} = require 'events'
+# Common
+Utils = require './utils'
 
 # Deps
-alfred = require('alfred')
+alfred = require 'alfred'
 
 # TODO
 # listener for keystore
-class Config extends EventEmitter
+class Config extends Utils
 	
   db: undefined
 	
-  @trace connect: (cb) ->
+  @trace init: (cb) ->
 
     alfred.open './', (error, db) =>
-      cb error  if error
+      throw error if error
       db.ensure 'config', (err, config) =>
+	
         @emit 'log:info', 'config database loaded'
+
         @db = db
         cb false
 
@@ -33,4 +35,4 @@ class Config extends EventEmitter
     @db.get key, (error, value) =>
       cb value
 
-exports.Config = Config
+module.exports = Config

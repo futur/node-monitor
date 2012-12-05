@@ -1,7 +1,15 @@
+#
+# A collection of useful methods and the interface specification.
+#
+
+# Interface
+{EventEmitter} = require 'events'
+
+# Deps
 crypto = require 'crypto'
 exec = require('child_process').exec
 
-class Utils
+class Utils extends EventEmitter
 	
   @trace info: () ->
 
@@ -27,4 +35,4 @@ class Utils
 
     crypto.createHash('md5').update(text).digest('hex')
 
-exports.Utils = Utils
+module.exports = Utils
