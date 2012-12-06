@@ -2,15 +2,15 @@
 # A collection of useful methods and the interface specification.
 #
 
-# Interface
-{EventEmitter} = require 'events'
+# Common
+Base = require './base'
 
 # Deps
 crypto = require 'crypto'
 exec = require('child_process').exec
 
-class Utils extends EventEmitter
-	
+class Utils extends Base
+
   @trace info: () ->
 
     console.log('Version: ' + process.version)

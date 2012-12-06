@@ -9,6 +9,8 @@
     "long-stack-traces": "",
     "commander":"",
     "alfred":"",
+    "underscore": "",
+    "watch": "",
     "crypto":"",
     "node-cloudwatch":"",
     "connect":"",

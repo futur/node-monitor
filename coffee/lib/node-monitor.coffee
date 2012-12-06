@@ -3,8 +3,8 @@
 #
 
 # Common
-{Plugins} = require './plugins'
-{Config} = require './config'.Config
+Plugins = require './plugins'
+Config = require './config'.Config
 
 # Deps
 alfred = require 'alfred'
