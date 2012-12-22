@@ -1,7 +1,7 @@
 /* Application configuration (default). */
 {
   "app": {
-    "poll": 3600, /* 6 minute polls. */
+    "poll": 300, /* 5 minute poll default. */
     "log": {
       "to": [
         "files",
@@ -22,6 +22,13 @@
   "plugins": {
     "cpu": {
       "test": "val"
+    },
+    /* Disk space percentage. */
+    "df": {
+      "poll": 5,
+      "disks": [
+        "/dev/disk0s2"
+      ]
     },
     /* Log file tailer. */
     "tail": {
