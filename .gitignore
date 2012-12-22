@@ -1,7 +1,3 @@
-src
-js/
 docs
 node_modules
 .DS_Store
-lib
-.alf*
