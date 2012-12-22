@@ -28,9 +28,13 @@ class Plugin extends Base
 
   format: (stdout) ->
 
+    ### Format stdout. ###
+
     stdout.replace '%', ''
 
   handler: (disk, df) ->
+
+    ### Command callback. ###
 
     @log 'Disk: ' + disk, @green
     @log 'Size: ' + df, @green
