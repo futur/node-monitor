@@ -13,7 +13,7 @@ class Plugin extends Base
 
     setInterval (=>
       @runPlugin(config)
-    ), poll * 1000 # TODO config not configured, etc.
+    ), poll * 1000
 
     cbSuccess()
 
