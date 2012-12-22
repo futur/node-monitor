@@ -24,13 +24,17 @@ class Plugin extends Base
     @_.each config.disks, (disk) =>
       command = 'df -h | grep -v grep | grep \'' + disk + '\' | awk \'{print $5}\''
       @run command, (stdout) =>
-        @handler disk, stdout.replace '%', ''
+        @handler disk, @format(stdout)
+
+  format: (stdout) ->
+
+    stdout.replace '%', ''
 
   handler: (disk, df) ->
 
     @log 'Disk: ' + disk, @green
     @log 'Size: ' + df, @green
     
-    @emit 'plugins:df', disk, df, '%'
+    @emit 'plugins:df', disk, df
 
 module.exports = Plugin
