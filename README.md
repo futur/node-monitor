@@ -1,7 +1,37 @@
 node-monitor
 ======
 
-Simple machine monitoring.
+Machine monitoring.
+
+## Setup ##
+
+```
+cd node-monitor
+npm install
+```
+
+## Dev ##
+
+1. All commands are available via [CoffeeScript's cake](http://coffeescript.org) (no, not that kind):
+
+_No global coffee-script_:
+
+```
+cd node-monitor
+cake
+```
+
+_Globl coffee-script_:
+
+```
+cd node-monitor
+cake
+```
+
+## Mass Deploymentn ##
+
+1. AMI
+
 
 ## Assumptions
 

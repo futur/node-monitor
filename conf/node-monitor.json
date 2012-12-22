@@ -1,0 +1,46 @@
+/* Application configuration (default). */
+{
+  "app": {
+    "poll": 3600, /* 6 minute polls. */
+    "log": {
+      "to": [
+        "files",
+        "db"
+      ],
+      "files": [
+        /* This is defaulted to a relative path. It an be absolute, e.g /var/log/node-monitor/log . */
+        "log/node-monitor.log" 
+      ],
+      "db": [
+        "redis"
+      ]
+    },
+    "email": false,
+    "sms": false,
+    "webservice": false
+  },
+  "plugins": {
+    "cpu": {
+      "test": "val"
+    },
+    /* Log file tailer. */
+    "tail": {
+      "files": [ 
+      ]
+    }
+  },
+  "crendetials": {
+    "aws": {
+      "secret": "<SECRET>",
+      "key": "<KEY>"
+    },
+    "gmail": {
+      "username": "<USERNAME>",
+      "password": "<PASSWORD>"
+    },
+    "twilio": {
+      "sid": "<SID>",
+      "token": "<TOKEN>"
+    }
+  }
+}

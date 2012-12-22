@@ -1,30 +1,41 @@
 {
-  "name": "node-monitor",
-  "version": "0.1.0",
-  "description": "Node.js monitor",
-  "keywords": ["node", "monitor"],
-  "repository": "git://github.com/franklovecchio/app-mq.git",
-  "author": "Frank LoVecchio <franklovecchio@gmail.com> (http://franklovecchio.com)",
-  "dependencies": {
-    "long-stack-traces": "",
-    "commander":"",
-    "alfred":"",
-    "underscore": "",
-    "watch": "",
-    "crypto":"",
-    "node-cloudwatch":"",
-    "connect":"",
-    "express":"",
-    "restler": "",
-	"mqttjs":"",
-    "cassandra-client": "",
-    "redis":"",
-    "mongodb":""
+  "name":"node-monitor",
+  "version":"0.0.7",
+  "description":"Node.js monitoring agent.",
+  "keywords":["node", "monitor"],
+  "repository":"git://github.com/franklovecchio/node-monitor.git",
+  "scripts": {
+    "start":"coffee src/monitor.coffee",
+    "test":"cake tests"
   },
-  "bin": {
-    "node-monitor": "./bin/node-monitor"
+  "dependencies": {
+    "coffee-script":"*",
+    "cjson":"*",
+    "express": "3.0.4",
+    "underscore":"*",
+    "alfred":"*",
+    "underscore": "*",
+    "shelljs":"*",
+    "crypto":"*",
+    "watch":"*",
+    "node-cloudwatch":"*",
+    "express":"*",
+    "restler": "*",
+    "mqttjs":"*",
+    "helenus": "*",
+    "redis":"*",
+    "mongodb":"*",
+    "twilio":"*"
+  },
+  "devDependencies": {
+    "flour":"*",
+    "coffeelint":"*",
+    "uglify-js":"*",
+    "mocha":"*",
+    "should":"*",
+    "coffeedoc":"*"
   },
   "license": {
-    "type": "Hack the planet"
+    "type":"Hack the planet"
   }
 }
