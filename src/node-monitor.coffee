@@ -4,6 +4,7 @@ console.log '\x1B[0m'
 Base = require process.cwd() + '/src/lib/base'
 Config = require process.cwd() + '/src/lib/config'
 Plugins = require process.cwd() + '/src/lib/plugins'
+ApiInterface = require process.cwd() + '/src/lib/api'
 
 class NodeMonitor extends Base
 
@@ -33,35 +34,61 @@ class NodeMonitor extends Base
       api.use express.methodOverride()
       api.use api.router
 
-    # A single access point for the API interface.
-    api.post '/', (req, res) =>
-      @emit 'api', req, res
+    api.get '/app', (req, res) =>
+
+      ### Restart service. ###
+
       res.send 200, '{"status":"ok"}'
 
+    api.get '/plugin', (req, res) =>
+
+      ### Update plugin config and restart. ###
+
+      ### Add plugin from Gist and start. ###
+     
+      ### Stop plugin and remove. ###
+
+      res.send 200, '{"status":"ok"}'
+
+    ###api.get '/*', (req, res) =>
+      
+      @log 'url: ' + req.originalUrl, @bold
+      @log 'method: ' + req.method, @bold
+
+      @emit 'api:req', req, res
+
+      res.send 200, '{"status":"ok"}'###
+
     api.listen 3000, () -> 
-      process.env.api = api
       cb()
 
   runPlugins: (cb) ->
 
     ### Run plugins. ###
 
-    plugins = new Plugins(
+    new Plugins(
       (err) =>
         @err err
       () ->
         cb()
     )
 
+  restart: () ->
+
+    ### Restart the service. ###
+
   interfaces: (cb) ->
 
     ### Testing. ###
 
     @on 'plugins:cpu', (cpu) ->
-      console.log 'plugins:cpu -> ' + cpu
+      @log 'plugins:cpu -> ' + cpu
+
+    @on 'plugins:df', (disk, usage) ->
+      @log 'plugins:df -> ' + disk + ', ' + usage
 
     @on 'plugins:memory', (memory) ->
-      console.log 'plugins:memory -> ' + memory
+      @log 'plugins:memory -> ' + memory
 
     cb()
 

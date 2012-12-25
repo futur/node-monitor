@@ -1,21 +1,11 @@
-Base = require process.cwd() + '/src/lib/base'
+PluginInterface = require process.cwd() + '/src/lib/plugin'
 
-class Memory extends Base
+class Plugin extends PluginInterface
 
-  constructor: (config, cbErr, cbSuccess) ->
-
-    ### Handle config and set interval. ###
-
-    setInterval (=>
-      @runPlugin()
-    ), 5 * 1000 # TODO config not configured, etc.
-
-    cbSuccess()
-
-  runPlugin: () ->
+  run: () ->
 
     ### Plugin and interface. ###
 
     @emit 'plugins:memory', '10'
 
-module.exports = Memory
+module.exports = Plugin

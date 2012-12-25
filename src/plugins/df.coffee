@@ -1,29 +1,14 @@
-Base = require process.cwd() + '/src/lib/base'
+PluginInterface = require process.cwd() + '/src/lib/plugin'
 
-class Plugin extends Base
+class Plugin extends PluginInterface
 
-  constructor: (config, cbErr, cbSuccess) ->
-
-    ### Handle config and set interval. ###
-
-    if !config.poll
-      poll = @config().app.poll
-    else
-      poll = config.poll
-
-    setInterval (=>
-      @runPlugin(config)
-    ), poll * 1000
-
-    cbSuccess()
-
-  runPlugin: (config) ->
+  run: (config) ->
 
     ### Plugin and interface. ###
 
     @_.each config.disks, (disk) =>
       command = 'df -h | grep -v grep | grep \'' + disk + '\' | awk \'{print $5}\''
-      @run command, (stdout) =>
+      @cmd command, (stdout) =>
         @handler disk, @format(stdout)
 
   format: (stdout) ->
@@ -32,13 +17,10 @@ class Plugin extends Base
 
     stdout.replace '%', ''
 
-  handler: (disk, df) ->
+  handler: (disk, usage) ->
 
     ### Command callback. ###
-
-    @log 'Disk: ' + disk, @green
-    @log 'Size: ' + df, @green
     
-    @emit 'plugins:df', disk, df
+    @emit 'plugins:df', disk, usage
 
 module.exports = Plugin

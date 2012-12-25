@@ -30,18 +30,6 @@ class Base extends EventEmitter
     'NO_PLUGIN_CONFIG': 'No plugin config found.'
     'PLUGIN_LOAD_ERROR': 'Error (re)loading plugin.'
 
-  config: () ->
-
-    ### Return JSON config from process. ###
-
-    JSON.parse(process.env.config)
-
-  filterCoffeeSuffix: (file) ->
-
-    ### Filter coffee suffix from file. ###
-
-    file.substr(0, file.length - 7)
-
   log: (message, color, explanation) ->
 
     ### Log with an explanation in a specified color. ###
@@ -115,7 +103,7 @@ class Base extends EventEmitter
 
     info
 
-  run: (command, cb) ->
+  cmd: (command, cb) ->
 
     ### Run a unix command. ###
 
@@ -137,5 +125,19 @@ class Base extends EventEmitter
     ### MD5 a string. ###
 
     @crypto.createHash('md5').update(text).digest('hex')
+
+  config: () ->
+
+    ### Return JSON config from process. ###
+
+    JSON.parse(process.env.config)
+
+  filterCoffeeSuffix: (file) ->
+
+    ### Filter coffee suffix from file. ###
+
+    file.substr(0, file.length - 7)
+
+  
 
 module.exports = Base
