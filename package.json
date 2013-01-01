@@ -18,13 +18,16 @@
     "shelljs":"*",
     "crypto":"*",
     "watch":"*",
+    "dateformat":"*",
     "node-cloudwatch":"*",
     "express":"*",
     "restler": "*",
     "mqttjs":"*",
     "helenus": "*",
     "redis":"*",
+    "hiredis":"*",
     "mongodb":"*",
+    "solr":"*",
     "twilio":"*"
   },
   "devDependencies": {

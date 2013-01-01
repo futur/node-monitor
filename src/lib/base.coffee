@@ -5,7 +5,14 @@ _ = require 'underscore'
 path = require 'path'
 cjson = require 'cjson'
 crypto = require 'crypto'
+df = require 'dateformat'
 exec = require('child_process').exec
+spawn = require('child_process').spawn
+helenus = require 'helenus'
+redis = require 'redis'
+#hdfs = require 'node-hdfs'
+solr = require 'solr'
+cloudwatchApi = require 'node-cloudwatch'
 
 class Base extends EventEmitter
 
@@ -15,7 +22,14 @@ class Base extends EventEmitter
   path: path
   cjson: cjson
   crypto: crypto
+  df: df
   exec: exec
+  spawn: spawn
+  helenus: helenus
+  redis: redis
+  #hdfs: hdfs
+  solr: solr
+  cloudwatch: new cloudwatchApi.AmazonCloudwatchClient()
   bold: '\x1B[0;1m'
   red: '\x1B[0;31m'
   green: '\x1B[0;32m'
@@ -23,6 +37,7 @@ class Base extends EventEmitter
   messages:
     'PLUGINS_LOADED': 'Plugins loaded, node-monitor running.'
     'FOUND_PLUGIN_CONFIG': 'Found plugin config.'
+    'PLUGIN_STOPPED': 'Plugin stopped.'
   errors: 
     'NOT_CONFIGURED_CORRECTLY': 'Not configured correctly.'
     'NOTIFICATION_EMAIL_NOT_SENT': 'E-mail not sent.'
@@ -41,7 +56,34 @@ class Base extends EventEmitter
 
   err: (message) ->
 
+    ### Throw a fatal exception. ###
+
     throw new Error(@reset + @red + message)
+
+  formatLogMessage: (type, message) ->
+
+    ### Standard internal log message for filesystems. ###
+
+    epoch = new Date().getTime()
+
+    log = epoch + ' ' + type + ' ' + message
+    log = log.toString().replace /\r\n|\r/g, '\n'
+    log = log + '\n'
+
+    log
+
+  formatLog: (type, message) ->
+
+    ### Standard internal log message for dbs. ###
+
+    now = new Date()
+
+    log =
+      key: df(now, 'yy:m:dd')
+      epoch: now.getTime()
+      message: type + ' ' + message
+
+    log
 
   responseHandler: (result, resp, cb) ->
 
@@ -108,7 +150,7 @@ class Base extends EventEmitter
     ### Run a unix command. ###
 
     child = @exec(command, (error, stdout, stderr) ->
-      cb new String(stdout).trim()
+      cb new String(stdout).trim(), pid
     )    
 
   isEmpty: (variable) ->
@@ -126,7 +168,7 @@ class Base extends EventEmitter
 
     @crypto.createHash('md5').update(text).digest('hex')
 
-  config: () ->
+  getGlobalConfig: () ->
 
     ### Return JSON config from process. ###
 

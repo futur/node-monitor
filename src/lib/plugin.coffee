@@ -2,21 +2,18 @@ Base = require process.cwd() + '/src/lib/base'
 
 class PluginInterface extends Base
 
-  constructor: (config, cbErr, cbSuccess) ->
+  constructor: (@config, cbErr, cbSuccess) ->
 
     ### Handle config and set interval. ###
 
-    if !config.poll
-      poll = @config().app.poll
+    if !@config.poll
+      poll = @getGlobalConfig().app.poll
     else
-      poll = config.poll
+      poll = @config.poll
 
-    intervalId = setInterval (=>
-      @run config # Subclass method.
+    interval = setInterval (=>
+      @run() # Subclass method.
+      cbSuccess interval
     ), poll * 1000
-
-    console.log JSON.stringify(intervalId)
-    
-    cbSuccess()
 
 module.exports = PluginInterface

@@ -5,7 +5,7 @@ class Plugins extends Base
   loaded: { }
   available: [ ]
 
-  constructor: (cbErr, cbSuccess) ->
+  constructor: (cb) ->
 
     ### Read plugin directory, get configs (if applicable), run plugins. ###
 
@@ -21,6 +21,8 @@ class Plugins extends Base
           @log @messages.FOUND_PLUGIN_CONFIG, @green, pluginName
           @runPlugin pluginName, config
       )
+
+    cb()
 
   readPluginsDirectory: () ->
 
@@ -51,14 +53,18 @@ class Plugins extends Base
       (err) =>
         @log @messages.PLUGIN_LOAD_ERROR, @red, pluginName
         @loaded[pluginName] = false
-      (id) =>
-        console.log 'interval: ' + id
-        @loaded[pluginName] = id
+      (interval) =>
+        @loaded[pluginName] = interval
     )
 
   stopPlugin: (pluginName) ->
 
+    ### Stop a running plugin. ###
+
     clearInterval @loaded[pluginName]
+
+    @log @messages.PLUGIN_STOPPED, @red, pluginName
+    @loaded[pluginName] = false
 
   addPluginFromGist: (pluginName) ->
 
@@ -67,6 +73,5 @@ class Plugins extends Base
     ### Where does config come from? ###
 
   deletePlugin: (pluginName) ->
-
 
 module.exports = Plugins

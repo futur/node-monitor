@@ -1,41 +1,23 @@
-fs = require 'fs' 
-cloudwatchApi = require 'node-cloudwatch'
+Base = require '../lib/base'
 
-Module = {}
+class CloudWatch extends Base
 
-class Cloudwatch 
+  constructor: (@namespace, @instanceID) ->
 
-  constructor: (utilities) ->
+  post: (metricName, unit, value, cbErr, cbSuccess) ->
 
-    Module = this
-    Module.utilities = utilities  
-    Module.cloudwatchApi = new cloudwatchApi.AmazonCloudwatchClient()
-
-  post: (metricName, unit, value) ->
-   
     params = 
-      Namespace: utilities.getCloudwatchNamespace
+       Namespace: @namepsace
       'MetricData.member.1.MetricName': metricName
       'MetricData.member.1.Unit': unit
       'MetricData.member.1.Value': value
       'MetricData.member.1.Dimensions.member.1.Name': 'InstanceID'
-      'MetricData.member.1.Dimensions.member.1.Value': utilities.getInstanceId
- 
-    console.log 'Cloudwatch Namespace: ' + Module.utilities.getCloudwatchNamespace
-    console.log 'InstanceId: ' + Module.utilities.getInstanceId
-    console.log 'MetricName: ' + metricName
-    console.log 'Unit: ' + unit
-    console.log 'Value: '+ value
-  
-    # Always want to log what would be submitted to the CloudWatch API
-    return unless Module.utilities.isCloudwatchEnabled is true
-  
+      'MetricData.member.1.Dimensions.member.1.Value': @instanceID
+
     try
-      Module.cloudwatchApi.request 'PutMetricData', params, (response) ->
-      
-        console.log 'CloudWatch response: ' + response.toString
-      
-    catch error
-      console.log 'CloudWatch API error: ' + error
- 
-exports.Cloudwatch = Cloudwatch
+      @cloudwatch.request 'PutMetricData', params, (response) ->
+        cbSuccess response
+    catch err
+      cbErr err
+
+module.exports = CloudWatch

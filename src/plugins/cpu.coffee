@@ -6,6 +6,8 @@ class Plugin extends PluginInterface
 
     ### Plugin and interface. ###
 
+    @log 'plugins:cpu', @green
+
     @emit 'plugins:cpu', '10'
 
 module.exports = Plugin

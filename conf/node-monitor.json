@@ -2,22 +2,57 @@
 {
   "app": {
     "poll": 300, /* 5 minute poll default. */
-    "log": {
-      "to": [
-        "files",
-        "db"
-      ],
-      "files": [
-        /* This is defaulted to a relative path. It an be absolute, e.g /var/log/node-monitor/log . */
-        "log/node-monitor.log" 
-      ],
-      "db": [
-        "redis"
-      ]
+    "output": {
+      "file": {
+        "status": true,
+        "files": [
+          /* This is defaulted to a relative path. It an be absolute, e.g /var/log/node-monitor/log . */
+          "log/node-monitor.log" 
+        ],
+        "cassandra": {
+          "status": true
+        },
+        "hdfs": {
+          "status": true
+        },
+        "mongo": {
+          "status": true
+        },
+        "redis": {
+          "status": true
+        },
+        "solr": {
+          "status": true
+        }
+      }
     },
     "email": false,
     "sms": false,
     "webservice": false
+  },
+  /* Handle alerts locally or with a service. */
+  "alerts": {
+    "cloudwatch": {
+      "status": false,
+      "namepsace": "<NAMESPACE>"
+    },
+    /* Rule strings are interpreted via eval if statements. */
+    "rules": [
+      {
+        "1": {
+          "event": "plugins:df",
+          "rule": "disk is /dev/disk0s2 and size > 60",
+          "actions": {
+            "email": [
+            ],
+            "sms": [
+            ],
+            "webservice": {
+            }
+          }
+        }
+      }
+    ]
   },
   "plugins": {
     "cpu": {

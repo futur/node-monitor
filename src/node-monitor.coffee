@@ -66,9 +66,7 @@ class NodeMonitor extends Base
 
     ### Run plugins. ###
 
-    new Plugins(
-      (err) =>
-        @err err
+    @plugins = new Plugins(
       () ->
         cb()
     )
