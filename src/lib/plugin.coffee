@@ -6,9 +6,15 @@ class PluginInterface extends Base
 
     ### Handle config and set interval. ###
 
+    console.log @config
+
     if !@config.poll
       poll = @getGlobalConfig().app.poll
     else
+      if @config.poll is 'no'
+        @run()
+        cbSuccess 0
+        return
       poll = @config.poll
 
     interval = setInterval (=>

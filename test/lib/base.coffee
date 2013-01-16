@@ -2,6 +2,8 @@ Base = require process.cwd() + '/src/lib/base'
 
 ### Setup. ###
 
+os = require 'os'
+
 class Test extends Base
 
 ### Tests. ###
@@ -25,5 +27,12 @@ describe '======= Base.class =======', ->
 
     test = new Test()
     test.log 'bold', test.bold
+
+    done()
+
+  it 'should print OS info', (done) ->
+
+    test = new Test()
+    test.log JSON.stringify(test.info()), test.bold
 
     done()

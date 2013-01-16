@@ -2,7 +2,7 @@ PluginInterface = require process.cwd() + '/src/lib/plugin'
 
 class Plugin extends PluginInterface
 
-  run: () ->
+  run: (cb) ->
 
     ### Get disk usage in percentage. ###
 
@@ -11,6 +11,8 @@ class Plugin extends PluginInterface
     @_.each @config.disks, (disk) =>
       command = 'df -h | grep -v grep | grep \'' + disk + '\' | awk \'{print $5}\''
       @cmd command, (stdout, pid) =>
+        if cb
+          cb disk, @format(stdout)
         @emit 'plugins:df', disk, @format(stdout)
 
   format: (stdout) ->

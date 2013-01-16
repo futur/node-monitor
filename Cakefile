@@ -54,7 +54,7 @@ class Test
 
     tests = file.replace('src', 'test')
 
-    @run './node_modules/mocha/bin/mocha', ['--compilers', 'coffee:coffee-script', tests, '--require', 'should', '-R', 'spec'] # '-R', 'spec', 
+    @run './node_modules/mocha/bin/mocha', ['--compilers', 'coffee:coffee-script', tests, '--require', 'should', '-R', 'spec', '-t', 20 * 1000]
         
   walk: (dir, cb) ->
 

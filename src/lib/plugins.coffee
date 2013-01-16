@@ -34,10 +34,10 @@ class Plugins extends Base
 
     ### Read plugin config. ###
 
-    if @config().plugins[pluginName] is undefined
+    if @getGlobalConfig().plugins[pluginName] is undefined
       cbErr pluginName
     else
-      cbSuccess pluginName, @config().plugins[pluginName]
+      cbSuccess pluginName, @getGlobalConfig().plugins[pluginName]
 
   runPlugin: (pluginName, config) ->
 
@@ -66,7 +66,7 @@ class Plugins extends Base
     @log @messages.PLUGIN_STOPPED, @red, pluginName
     @loaded[pluginName] = false
 
-  addPluginFromGist: (pluginName) ->
+  addPluginFromUrl: (pluginName) ->
 
     ### Add plugin. ###
 

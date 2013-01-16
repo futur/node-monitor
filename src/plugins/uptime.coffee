@@ -6,10 +6,10 @@ class Plugin extends PluginInterface
 
     ### Plugin and interface. ###
 
-    @log 'plugins:memory', @green
+    @log 'plugins:uptime', @green
 
     if cb
-      cb @os.freemem()
-    @emit 'plugins:memory', @os.freemem()
+      cb @os.uptime()
+    @emit 'plugins:uptime', @os.uptime()
 
 module.exports = Plugin

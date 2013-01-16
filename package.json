@@ -5,7 +5,7 @@
   "keywords":["node", "monitor"],
   "repository":"git://github.com/franklovecchio/node-monitor.git",
   "scripts": {
-    "start":"coffee src/monitor.coffee",
+    "start":"coffee src/node-monitor.coffee",
     "test":"cake tests"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "crypto":"*",
     "watch":"*",
     "dateformat":"*",
+    "socket.io":"*",
     "node-cloudwatch":"*",
     "express":"*",
     "restler": "*",

@@ -16,12 +16,9 @@ describe '======= df =======', ->
       (err) ->
         done()
       () ->
-        @run()
-        #done()
+        @on 'plugins:df', (disk, usage) ->
+          console.log disk
+          done 'err'
+        @run (disk, usage) ->
+          console.log disk
     )
-
-    plugin.on 'plugins:df', (disk, usage) ->
-      console.log disk
-      done()
-
-    #done()

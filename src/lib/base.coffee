@@ -5,6 +5,7 @@ _ = require 'underscore'
 path = require 'path'
 cjson = require 'cjson'
 crypto = require 'crypto'
+os = require 'os'
 df = require 'dateformat'
 exec = require('child_process').exec
 spawn = require('child_process').spawn
@@ -13,6 +14,7 @@ redis = require 'redis'
 #hdfs = require 'node-hdfs'
 solr = require 'solr'
 cloudwatchApi = require 'node-cloudwatch'
+io = require('socket.io')
 
 class Base extends EventEmitter
 
@@ -27,9 +29,11 @@ class Base extends EventEmitter
   spawn: spawn
   helenus: helenus
   redis: redis
+  os: os
   #hdfs: hdfs
   solr: solr
   cloudwatch: new cloudwatchApi.AmazonCloudwatchClient()
+  io: io
   bold: '\x1B[0;1m'
   red: '\x1B[0;31m'
   green: '\x1B[0;32m'
@@ -139,19 +143,16 @@ class Base extends EventEmitter
     ### Return process info. ###
 
     info = 
-      version: process.version
-      platform: process.platform
-      arch: process.arch
+      platform: @os.platform()
+      arch: @os.arch()
 
     info
 
   cmd: (command, cb) ->
 
     ### Run a unix command. ###
-
-    child = @exec(command, (error, stdout, stderr) ->
-      cb new String(stdout).trim(), pid
-    )    
+    @exec command, (error, stdout, stderr) ->
+      cb new String(stdout).trim()
 
   isEmpty: (variable) ->
 
@@ -174,12 +175,14 @@ class Base extends EventEmitter
 
     JSON.parse(process.env.config)
 
+  setGlobalConfig: (config) ->
+    
+    process.env.config = JSON.stringify(config)
+
   filterCoffeeSuffix: (file) ->
 
     ### Filter coffee suffix from file. ###
 
     file.substr(0, file.length - 7)
-
-  
 
 module.exports = Base

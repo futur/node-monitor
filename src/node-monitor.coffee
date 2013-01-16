@@ -15,9 +15,9 @@ class NodeMonitor extends Base
     config = new Config(
       (err) =>
         @err err
-      (config) ->
+      (config) =>
         # Set config globally.
-        process.env.config = JSON.stringify(config)
+        @setGlobalConfig config
         cb()
     )
 
@@ -79,14 +79,28 @@ class NodeMonitor extends Base
 
     ### Testing. ###
 
+    console.log 'INTERF'
+
     @on 'plugins:cpu', (cpu) ->
       @log 'plugins:cpu -> ' + cpu
 
     @on 'plugins:df', (disk, usage) ->
       @log 'plugins:df -> ' + disk + ', ' + usage
 
+    @on 'plugins:filesize', (file, size, max) ->
+      @log 'plugins:filesize -> ' + file + ', ' + size + ', ' + max
+
+    @on 'plugins:load', (load) ->
+      @log 'plugins:load -> ' + load
+
     @on 'plugins:memory', (memory) ->
       @log 'plugins:memory -> ' + memory
+
+    @on 'plugins:tail', (file, line) ->
+      @log 'plugins:tail -> ' + file + ', ' + line
+
+    @on 'plugins:uptime', (uptime) ->
+      @log 'plugins:uptime -> ' + uptime
 
     cb()
 
