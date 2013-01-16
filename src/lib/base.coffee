@@ -176,6 +176,8 @@ class Base extends EventEmitter
     JSON.parse(process.env.config)
 
   setGlobalConfig: (config) ->
+
+    ### Set JSON config in process. ###
     
     process.env.config = JSON.stringify(config)
 

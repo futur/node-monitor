@@ -8,6 +8,10 @@ ApiInterface = require process.cwd() + '/src/lib/api'
 
 class NodeMonitor extends Base
 
+  constructor: () ->
+
+    @log JSON.stringify(@info()), @bold
+
   loadConfig: (cb) ->
 
     ### Load configuration from a file. ###

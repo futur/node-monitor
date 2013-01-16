@@ -8,8 +8,6 @@ class Plugin extends PluginInterface
 
     @log 'plugins:cpu', @green
 
-    @log 'platform: ' + @info().platform, @green
-     
     switch @info().platform
       when 'darwin'
         command = '?'

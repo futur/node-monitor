@@ -23,6 +23,9 @@
         },
         "solr": {
           "status": true
+        },
+        "websocket": {
+          "status": true
         }
       }
     },
