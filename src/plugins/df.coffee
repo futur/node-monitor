@@ -13,11 +13,11 @@ class Plugin extends PluginInterface
       @cmd command, (stdout, pid) =>
         if cb
           cb disk, @format(stdout)
-        @emit 'plugins:df', disk, @format(stdout)
+        process.monitor.emit 'plugins:df', disk, @format(stdout)
 
   format: (stdout) ->
 
-    ### Format stdout. ###
+    ### Format. ###
 
     stdout.replace '%', ''
 

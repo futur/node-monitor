@@ -1,3 +1,6 @@
+# Profiling.
+require('nodetime').profile()
+
 # Reset console.
 console.log '\x1B[0m'
 
@@ -81,10 +84,6 @@ class NodeMonitor extends Base
 
   interfaces: (cb) ->
 
-    ### Testing. ###
-
-    console.log 'INTERF'
-
     @on 'plugins:cpu', (cpu) ->
       @log 'plugins:cpu -> ' + cpu
 
@@ -97,18 +96,22 @@ class NodeMonitor extends Base
     @on 'plugins:load', (load) ->
       @log 'plugins:load -> ' + load
 
-    @on 'plugins:memory', (memory) ->
-      @log 'plugins:memory -> ' + memory
+    @on 'plugins:memory', (memory, units) ->
+      @log 'plugins:memory -> ' + memory + ', ' + units
 
     @on 'plugins:tail', (file, line) ->
       @log 'plugins:tail -> ' + file + ', ' + line
 
-    @on 'plugins:uptime', (uptime) ->
-      @log 'plugins:uptime -> ' + uptime
+    @on 'plugins:uptime', (uptime, units) ->
+      @log 'plugins:uptime -> ' + uptime + ', ' + units
 
     cb()
 
 monitor = new NodeMonitor()
+
+# Make available to all.
+process.monitor = monitor
+
 monitor.loadConfig () ->
   monitor.runApiInterface () ->
     monitor.interfaces () ->

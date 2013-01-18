@@ -9,7 +9,13 @@ class Plugin extends PluginInterface
     @log 'plugins:memory', @green
 
     if cb
-      cb @os.freemem()
-    @emit 'plugins:memory', @os.freemem()
+      cb @format(@os.freemem())
+    process.monitor.emit 'plugins:memory', @format(@os.freemem()), 'mb'
+
+  format: (bytes) ->
+
+    ### Format. ###
+
+    bytes / 1024
 
 module.exports = Plugin

@@ -69,7 +69,12 @@
       ]
     },
     "filesize": {
-      "poll": 10
+      "poll": 10,
+      "files": [
+        [
+          "/Users/franklovecchio/Desktop/log", 20 /* mb */
+        ]
+      ]
     },
     "load": {
       "poll": 10

@@ -10,6 +10,12 @@ class Plugin extends PluginInterface
 
     if cb
       cb @os.uptime()
-    @emit 'plugins:uptime', @os.uptime()
+    process.monitor.emit 'plugins:uptime', @format(@os.uptime()), 'seconds'
+
+  format: (ms) ->
+
+    ### Format. ###
+
+    ms / (60 * 1000 * 1000)
 
 module.exports = Plugin

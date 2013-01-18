@@ -26,6 +26,6 @@ class Plugin extends PluginInterface
             line = lines[0]
           if cb
             cb file, line
-          @emit 'plugins:tail', file, line
+          process.monitor.emit 'plugins:tail', file, line
     
 module.exports = Plugin

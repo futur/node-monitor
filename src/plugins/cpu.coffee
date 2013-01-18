@@ -10,12 +10,23 @@ class Plugin extends PluginInterface
 
     switch @info().platform
       when 'darwin'
-        command = '?'
+        command = 'top -l 1 | awk \'NR==4{print$7}\''
       when 'linux'
         command = 'top -b -n 1 | awk \'NR==3{print$2}\''
+
+    @cmd command, (stdout, pid) =>
+      if cb
+        cb @format(stdout)
+      process.monitor.emit 'plugins:cpu', @format(stdout)
   
-    if cb
-      cb '10'
-    @emit 'plugins:cpu', '10'
+  format: (stdout) ->
+
+    ### Format. ###
+
+    switch @info().platform
+      when 'darwin'
+        stdout = 100 - parseInt(stdout.replace '%', '')
+
+    stdout
 
 module.exports = Plugin

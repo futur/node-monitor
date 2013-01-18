@@ -151,6 +151,9 @@ class Base extends EventEmitter
   cmd: (command, cb) ->
 
     ### Run a unix command. ###
+
+    @log 'Running command: ' + command, @bold
+
     @exec command, (error, stdout, stderr) ->
       cb new String(stdout).trim()
 

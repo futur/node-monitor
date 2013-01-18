@@ -9,9 +9,18 @@ class Plugin extends PluginInterface
     @log 'plugins:filesize', @green
 
     @_.each @config.files, (file) =>
-      @fs.stat file.name, (error, stat) =>
+      path = file[0]
+      maxSize = file[1]
+      @log 'Checking filesize: ' + path + ', max: ' + maxSize
+      @fs.stat path, (error, stat) =>
         if cb
-          cb file.name, file.maxSize, stat.size
-        @emit 'plugins:filesize', file.name, file.maxSize, stat.size
+          cb path, maxSize, stat.size
+        process.monitor.emit 'plugins:filesize', path, maxSize, stat.size
+
+  format: (bytes) ->
+
+    ### Format. ###
+
+    bytes / 1024
 
 module.exports = Plugin

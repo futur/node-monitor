@@ -10,6 +10,6 @@ class Plugin extends PluginInterface
 
     if cb
       cb @os.loadavg()
-    @emit 'plugins:load', @os.loadavg()
+    process.monitor.emit 'plugins:load', @os.loadavg()
 
 module.exports = Plugin
