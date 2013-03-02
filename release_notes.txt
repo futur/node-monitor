@@ -14,3 +14,4 @@ v0.0.1
 - Plugins should be able to run as separate coffee files - play 2.0 apps?
 - Dynamic event emitters for bus logic.
 - PLugins now loaded separately in that when reconfigured they are their own threads. https://bjouhier.wordpress.com/2012/03/11/fibers-and-threads-in-node-js-what-for/
+- Added port scanning plugin. 
