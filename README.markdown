@@ -3,6 +3,8 @@
 
 This is an EC2 monitoring application which uses Node.js and the Amazon CloudWatch API.  The application is primarly used to push custom metrics, via plugins, to CLoudWatch -- where we can create alarms for failed services, high memory usage, etc.  Older branches pushed data to a NoSQL store + websockets (logs), but these functions are being ported to plugins as well. 
 
+<a href="http://www.wtfpl.net/"><img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png" width="80" height="15" alt="WTFPL" /></a>
+
 ### Prerequisites
 	
 * Amazon EC2 account
